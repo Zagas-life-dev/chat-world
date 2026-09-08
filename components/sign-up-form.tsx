@@ -24,6 +24,7 @@ export function SignUpForm({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [name, setName] = useState('')
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -44,8 +45,10 @@ export function SignUpForm({
       const { error } = await supabase.auth.signUp({
         email,
         password,
+        
         options: {
           emailRedirectTo: `${window.location.origin}/protected`,
+          data: {name}
         },
       });
       if (error) throw error;
@@ -79,7 +82,17 @@ export function SignUpForm({
                 </div>
               </div>
               
-
+                <div className="grid gap-2">
+                <Label htmlFor="email">Name</Label>
+                <Input
+                  id="display_name"
+                  type="text"
+                  placeholder="John doe"
+                  required
+                  value={name}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
