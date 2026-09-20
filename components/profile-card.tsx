@@ -37,5 +37,5 @@ export function ProfileCard(){
 
     if (loading) return <p>Loading...</p>;
     if  (error) return <p className="text-red-500">{error}</p>;
-    return <h1>{profile?.name}</h1>
+    return (<h1>{profile?.name}, {profile?.id}</h1> )
 }
